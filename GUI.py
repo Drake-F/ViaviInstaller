@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from installSoftware import pyInstall # , viperInstall, zebraInstall, mstInstall, ms_cipInstall
+from installSoftware import pyInstall, zebraInstall, viperInstall, mstInstall, ms_cipInstall
 
 class ViaviToolkit:
     def __init__(self, root):
@@ -34,7 +34,7 @@ class ViaviToolkit:
         self._build_install(outer)
 
     def _build_install(self, outer):
-        softwareOptions = ["Python", "Viper Monitor", "Zebra Printer", "MST", "MS-CIP"]
+        softwareOptions = ["Python", "Viper Monitor", "Zebra Designer", "MST", "MS-CIP"]
         ttk.Label(outer, text="Choose Software to Install:").grid(
             row=0, column=0, sticky="w", padx=(0,8), pady=5
         )
@@ -61,16 +61,22 @@ class ViaviToolkit:
         ).grid(row=6, column=0, padx=(0,8), pady=5, sticky="w")
         
     def _install_software(self):
-        if self.py_install:
+        if self.py_install.get():
             pyInstall()
-        if self.viper_install:
-            pass
-        if self.zebra_install:
-            pass
-        if self.MST_install:
-            pass
-        if self.MS_CIP_install:
-            pass
+        if self.viper_install.get():
+            viperInstall()
+        if self.zebra_install.get():
+            zebraInstall()
+        if self.MST_install.get():
+            mstInstall()
+        if self.MS_CIP_install.get():
+            ms_cipInstall()
+
+        self.py_install.set(False)
+        self.viper_install.set(False)
+        self.zebra_install.set(False)
+        self.MST_install.set(False)
+        self.MS_CIP_install.set(False)
 
 root = tk.Tk()
 app = ViaviToolkit(root)
